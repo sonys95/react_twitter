@@ -8,7 +8,6 @@ import Profile from "routes/Profile";
 const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
   return (
     <Router>
-      {isLoggedIn && <Navigation userObj={userObj} />}
       <Switch>
         <>
           {isLoggedIn ? (
@@ -22,6 +21,7 @@ const AppRouter = ({ refreshUser, isLoggedIn, userObj }) => {
                 justifyContent: "center",
               }}
             >
+              {isLoggedIn && <Navigation userObj={userObj} />}
               <Route exact path="/">
                 <Home userObj={userObj} />
               </Route>

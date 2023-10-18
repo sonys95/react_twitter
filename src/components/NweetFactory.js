@@ -52,51 +52,62 @@ const NweetFactory = ({ userObj }) => {
   };
   const onClearAttachment = () => setAttachment("");
   return (
-    <form onSubmit={onSubmit} className="factoryForm">
-      <div className="factoryInput__container">
-        <input
-          className="factoryInput__input"
-          value={nweet}
-          onChange={onChange}
-          type="text"
-          placeholder="What is happening!?"
-          maxLength={120}
-        />
-      </div>
-      <div>
-        <input
-          id="attach-file"
-          type="file"
-          accept="image/*"
-          onChange={onFileChange}
-          style={{
-            opacity: 0,
-          }}
-        />
-      </div>
-      {attachment && (
-        <div className="factoryForm__attachment">
-          <img
-            src={attachment}
+    <>
+      <h1
+        style={{
+          fontSize: "25",
+          color: "black",
+          marginBottom: "40px",
+        }}
+      >
+        Home
+      </h1>
+      <form onSubmit={onSubmit} className="factoryForm">
+        <div className="factoryInput__container">
+          <input
+            className="factoryInput__input"
+            value={nweet}
+            onChange={onChange}
+            type="text"
+            placeholder="What is happening!?"
+            maxLength={120}
+          />
+        </div>
+        <div>
+          <input
+            id="attach-file"
+            type="file"
+            accept="image/*"
+            onChange={onFileChange}
             style={{
-              backgroundImage: attachment,
+              opacity: 0,
             }}
           />
-          <div className="factoryForm__clear" onClick={onClearAttachment}>
-            <span>Remove</span>
-            <FontAwesomeIcon icon={faTimes} />
-          </div>
         </div>
-      )}
-      <div className="factoryForm_submit">
-        <label htmlFor="attach-file" className="factoryInput__label">
-          <span>Add photos</span>
-          <FontAwesomeIcon icon={faPlus} />
-        </label>
+        {attachment && (
+          <div className="factoryForm__attachment">
+            <img
+              src={attachment}
+              style={{
+                backgroundImage: attachment,
+              }}
+            />
+            <div className="factoryForm__clear" onClick={onClearAttachment}>
+              <span>Remove</span>
+              <FontAwesomeIcon icon={faTimes} />
+            </div>
+          </div>
+        )}
+        <div className="factoryForm_submit">
+          <label htmlFor="attach-file" className="factoryInput__label">
+            <span>Add photos</span>
+            <FontAwesomeIcon icon={faPlus} />
+          </label>
 
-        <input type="submit" value="Post" className="factoryInput__arrow" />
-      </div>
-    </form>
+          <input type="submit" value="Post" className="factoryInput__arrow" />
+        </div>
+      </form>
+    </>
   );
 };
 export default NweetFactory;
