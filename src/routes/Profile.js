@@ -31,7 +31,7 @@ export default ({ refreshUser, userObj }) => {
           onChange={onChange}
           type="text"
           autoFocus
-          placeholder="Display name"
+          placeholder="닉네입을 적어주세요"
           value={newDisplayName}
           className="formInput"
         />

@@ -1,19 +1,25 @@
 import { dbService, storageService } from "fbase";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import { formatDistanceToNow } from "date-fns";
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newNweet, setNewNweet] = useState(nweetObj.text);
+
   const onDeleteClick = async () => {
-    const ok = window.confirm("are you sure you want to delete this nweet?");
+    const ok = window.confirm("Are you sure you want to delete this nweet?");
     if (ok) {
       await dbService.doc(`nweets/${nweetObj.id}`).delete();
-      await storageService.refFromURL(nweetObj.attachmentUrl).delete();
+      if (nweetObj.attachmentUrl) {
+        await storageService.refFromURL(nweetObj.attachmentUrl).delete();
+      }
     }
   };
+
   const toggleEditing = () => setEditing((prev) => !prev);
+
   const onSubmit = async (event) => {
     event.preventDefault();
 
@@ -22,12 +28,17 @@ const Nweet = ({ nweetObj, isOwner }) => {
     });
     setEditing(false);
   };
+
   const onChange = (event) => {
     const {
       target: { value },
     } = event;
     setNewNweet(value);
   };
+
+  // Format the createdAt date
+  const formattedDate = new Date(nweetObj.createdAt).toLocaleString();
+
   return (
     <div className="nweet">
       {editing ? (
@@ -52,6 +63,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
         <>
           <h4>{nweetObj.text}</h4>
           {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} />}
+          <p>{formattedDate}</p> {/* Display the creation date */}
           {isOwner && (
             <div className="nweet__actions">
               <span onClick={onDeleteClick}>
