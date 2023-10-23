@@ -108,6 +108,6 @@ const NweetFactory = ({ userObj }) => {
         </div>
       </form>
     </>
-  );
+  ); //컴포넌트안에 넣기
 };
 export default NweetFactory;
