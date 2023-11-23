@@ -11,6 +11,7 @@ const NweetFactory = ({ userObj }) => {
     if (nweet === "") {
       return;
     }
+    //22
     event.preventDefault();
     let attachmentUrl = "";
     if (attachment !== "") {
